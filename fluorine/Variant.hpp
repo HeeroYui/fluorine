@@ -141,6 +141,11 @@ namespace fluorine {
 			 */
 			bool getBoolean() const;
 			/**
+			 * @brief Get the Boolean Value. (Safe mode)
+			 * @return requested value if compatible.
+			 */
+			bool getSafeBoolean() const;
+			/**
 			 * @brief check if the node is a fluorine::Boolean
 			 * @return true if the node is a fluorine::Boolean
 			 */
@@ -151,6 +156,11 @@ namespace fluorine {
 			 * @return requested value if compatible.
 			 */
 			int_t getInt() const;
+			/**
+			 * @brief Get the int_t Value. (Safe mode)
+			 * @return requested value if compatible.
+			 */
+			int_t getSafeInt() const;
 			/**
 			 * @brief check if the node is a fluorine::Integer
 			 * @return true if the node is a fluorine::Integer
@@ -163,6 +173,11 @@ namespace fluorine {
 			 */
 			uint_t getUInt() const;
 			/**
+			 * @brief Get the uint_t Value. (Safe mode)
+			 * @return requested value if compatible.
+			 */
+			uint_t getSafeUInt() const;
+			/**
 			 * @brief check if the node is a fluorine::UnsignedInteger
 			 * @return true if the node is a fluorine::UnsignedInteger
 			 */
@@ -173,6 +188,11 @@ namespace fluorine {
 			 * @return requested value if compatible.
 			 */
 			float_t getFloat() const;
+			/**
+			 * @brief Get the uint_t Value. (Safe mode)
+			 * @return requested value if compatible.
+			 */
+			float_t getSafeFloat() const;
 			/**
 			 * @brief check if the node is a fluorine::Float
 			 * @return true if the node is a fluorine::Float
@@ -185,6 +205,11 @@ namespace fluorine {
 			 */
 			void* getRawPointer() const;
 			/**
+			 * @brief Get the void* Value. (Safe mode)
+			 * @return requested value if compatible.
+			 */
+			void* getSafeRawPointer() const;
+			/**
 			 * @brief check if the node is a fluorine::RawPointer
 			 * @return true if the node is a fluorine::RawPointer
 			 */
@@ -195,6 +220,11 @@ namespace fluorine {
 			 * @return requested value if compatible.
 			 */
 			etk::String getString() const;
+			/**
+			 * @brief Get the etk::String Value. (Safe mode)
+			 * @return requested value if compatible.
+			 */
+			etk::String getSafeString() const;
 			/**
 			 * @brief check if the node is a fluorine::String
 			 * @return true if the node is a fluorine::String
@@ -219,6 +249,23 @@ namespace fluorine {
 				return getColorInt();
 			}
 			/**
+			 * @brief Get the etk::Color Value. (Safe mode)
+			 * @return requested value if compatible.
+			 */
+			etk::Color<float> getSafeColorFloat() const;
+			/**
+			 * @brief Get the etk::Color Value. (Safe mode)
+			 * @return requested value if compatible.
+			 */
+			etk::Color<> getSafeColorInt() const;
+			/**
+			 * @brief Get the etk::Color Value (generic etk type). (Safe mode)
+			 * @return requested value if compatible.
+			 */
+			etk::Color<> getSafeColor() const {
+				return getSafeColorInt();
+			}
+			/**
 			 * @brief check if the node is a fluorine::ColorFloat or fluorine::ColorInt
 			 * @return true if the node is a fluorine::ColorFloat or fluorine::ColorInt
 			 */
@@ -240,6 +287,11 @@ namespace fluorine {
 			 */
 			vec2 getVec2() const;
 			/**
+			 * @brief Get the vec2 Value. (Safe mode)
+			 * @return requested value if compatible.
+			 */
+			vec2 getSafeVec2() const;
+			/**
 			 * @brief check if the node is a fluorine::Vec2
 			 * @return true if the node is a fluorine::Vec2
 			 */
@@ -250,6 +302,11 @@ namespace fluorine {
 			 * @return requested value if compatible.
 			 */
 			ivec2 getIVec2() const;
+			/**
+			 * @brief Get the ivec2 Value. (Safe mode)
+			 * @return requested value if compatible.
+			 */
+			ivec2 getSafeIVec2() const;
 			/**
 			 * @brief check if the node is a fluorine::IVec2
 			 * @return true if the node is a fluorine::IVec2
@@ -262,6 +319,11 @@ namespace fluorine {
 			 */
 			vec3 getVec3() const;
 			/**
+			 * @brief Get the vec3 Value. (Safe mode)
+			 * @return requested value if compatible.
+			 */
+			vec3 getSafeVec3() const;
+			/**
 			 * @brief check if the node is a fluorine::Vec3
 			 * @return true if the node is a fluorine::Vec3
 			 */
@@ -272,6 +334,11 @@ namespace fluorine {
 			 * @return requested value if compatible.
 			 */
 			ivec3 getIVec3() const;
+			/**
+			 * @brief Get the ivec3 Value. (Safe mode)
+			 * @return requested value if compatible.
+			 */
+			ivec3 getSafeIVec3() const;
 			/**
 			 * @brief check if the node is a fluorine::IVec3
 			 * @return true if the node is a fluorine::IVec3

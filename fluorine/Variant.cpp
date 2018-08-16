@@ -274,6 +274,12 @@ fluorine::Variant::~Variant() {
 bool fluorine::Variant::getBoolean() const {
 	return m_dataUnion.m_boolean;
 }
+bool fluorine::Variant::getSafeBoolean() const {
+	if (isBoolean() == false) {
+		return 0;
+	}
+	return getBoolean();
+}
 
 bool fluorine::Variant::isBoolean() const {
 	return m_dataType == fluorine::variantType::Boolean;
@@ -281,6 +287,12 @@ bool fluorine::Variant::isBoolean() const {
 
 int_t fluorine::Variant::getInt() const {
 	return m_dataUnion.m_int;
+}
+int_t fluorine::Variant::getSafeInt() const {
+	if (isInt() == false) {
+		return 0;
+	}
+	return getInt();
 }
 
 bool fluorine::Variant::isInt() const {
@@ -291,12 +303,25 @@ uint_t fluorine::Variant::getUInt() const {
 	return m_dataUnion.m_uint;
 }
 
+uint_t fluorine::Variant::getSafeUInt() const {
+	if (isUInt() == false) {
+		return 0;
+	}
+	return getUInt();
+}
+
 bool fluorine::Variant::isUInt() const {
 	return m_dataType == fluorine::variantType::UnsignedInteger;
 }
 
 float_t fluorine::Variant::getFloat() const {
 	return m_dataUnion.m_float;
+}
+float_t fluorine::Variant::getSafeFloat() const {
+	if (isFloat() == false) {
+		return 0;
+	}
+	return getFloat();
 }
 
 bool fluorine::Variant::isFloat() const {
@@ -306,6 +331,12 @@ bool fluorine::Variant::isFloat() const {
 void* fluorine::Variant::getRawPointer() const {
 	return m_dataUnion.m_rawPointer;
 }
+void* fluorine::Variant::getSafeRawPointer() const {
+	if (isRawPointer() == false) {
+		return null;
+	}
+	return getRawPointer();
+}
 
 bool fluorine::Variant::isRawPointer() const {
 	return m_dataType == fluorine::variantType::RawPointer;
@@ -313,6 +344,12 @@ bool fluorine::Variant::isRawPointer() const {
 
 etk::String fluorine::Variant::getString() const {
 	return *(m_dataUnion.m_string);
+}
+etk::String fluorine::Variant::getSafeString() const {
+	if (isString() == false) {
+		return "";
+	}
+	return getString();
 }
 
 bool fluorine::Variant::isString() const {
@@ -332,6 +369,21 @@ etk::Color<> fluorine::Variant::getColorInt() const {
 	return *(m_dataUnion.m_colorInt);
 }
 
+etk::Color<float> fluorine::Variant::getSafeColorFloat() const {
+	if (    isColorInt() == false
+	     && isColorFloat() == false) {
+		return etk::Color<float>(0.0,0.0,0.0,1.0);
+	}
+	return getColorFloat();
+}
+etk::Color<> fluorine::Variant::getSafeColorInt() const {
+	if (    isColorInt() == false
+	     && isColorFloat() == false) {
+		return etk::Color<>(0,0,0,0xFF);
+	}
+	return getColorInt();
+}
+
 bool fluorine::Variant::isColor() const {
 	return    m_dataType == fluorine::variantType::ColorFloat
 	       || m_dataType == fluorine::variantType::ColorInt;
@@ -346,6 +398,12 @@ bool fluorine::Variant::isColorInt() const {
 vec2 fluorine::Variant::getVec2() const {
 	return *(m_dataUnion.m_vec2);
 }
+vec2 fluorine::Variant::getSafeVec2() const {
+	if (isVec2() == false) {
+		return vec2(0,0);
+	}
+	return getVec2();
+}
 
 bool fluorine::Variant::isVec2() const {
 	return m_dataType == fluorine::variantType::Vec2;
@@ -353,6 +411,12 @@ bool fluorine::Variant::isVec2() const {
 
 ivec2 fluorine::Variant::getIVec2() const {
 	return *(m_dataUnion.m_ivec2);
+}
+ivec2 fluorine::Variant::getSafeIVec2() const {
+	if (isIVec2() == false) {
+		return ivec2(0,0);
+	}
+	return getIVec2();
 }
 
 bool fluorine::Variant::isIVec2() const {
@@ -362,6 +426,12 @@ bool fluorine::Variant::isIVec2() const {
 vec3 fluorine::Variant::getVec3() const {
 	return *(m_dataUnion.m_vec3);
 }
+vec3 fluorine::Variant::getSafeVec3() const {
+	if (isVec3() == false) {
+		return vec3(0,0,0);
+	}
+	return getVec3();
+}
 
 bool fluorine::Variant::isVec3() const {
 	return m_dataType == fluorine::variantType::Vec3;
@@ -369,6 +439,12 @@ bool fluorine::Variant::isVec3() const {
 
 ivec3 fluorine::Variant::getIVec3() const {
 	return *(m_dataUnion.m_ivec3);
+}
+ivec3 fluorine::Variant::getSafeIVec3() const {
+	if (isIVec3() == false) {
+		return ivec3(0,0,0);
+	}
+	return getIVec3();
 }
 
 bool fluorine::Variant::isIVec3() const {
