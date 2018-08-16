@@ -35,8 +35,11 @@ etk::Stream& fluorine::operator <<(etk::Stream& _os, enum fluorine::variantType 
 		case fluorine::variantType::Boolean:
 			_os << "fluorine::variantType::Boolean";
 			break;
-		case fluorine::variantType::Color:
-			_os << "fluorine::variantType::Color";
+		case fluorine::variantType::ColorFloat:
+			_os << "fluorine::variantType::ColorFloat";
+			break;
+		case fluorine::variantType::ColorInt:
+			_os << "fluorine::variantType::ColorInt";
 			break;
 		case fluorine::variantType::Vec2:
 			_os << "fluorine::variantType::Vec2";

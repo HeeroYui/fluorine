@@ -26,7 +26,8 @@ namespace fluorine {
 		vec2* m_vec2;
 		ivec3* m_ivec3;
 		vec3* m_vec3;
-		etk::Color<>* m_color;
+		etk::Color<float>* m_colorFloat;
+		etk::Color<>* m_colorInt;
 	};
 	/**
 	 * @brief Basic main object of all json elements.
@@ -121,6 +122,10 @@ namespace fluorine {
 			 */
 			Variant(const ivec3& _value);
 			/**
+			 * @brief Constuctor that generate a etk::Color<float> value
+			 */
+			Variant(const etk::Color<float>& _value);
+			/**
 			 * @brief Constuctor that generate a etk::Color<> value
 			 */
 			Variant(const etk::Color<>& _value);
@@ -200,12 +205,34 @@ namespace fluorine {
 			 * @brief Get the etk::Color Value.
 			 * @return requested value if compatible.
 			 */
-			etk::Color<> getColor() const;
+			etk::Color<float> getColorFloat() const;
 			/**
-			 * @brief check if the node is a fluorine::Color
-			 * @return true if the node is a fluorine::Color
+			 * @brief Get the etk::Color Value.
+			 * @return requested value if compatible.
+			 */
+			etk::Color<> getColorInt() const;
+			/**
+			 * @brief Get the etk::Color Value (generic etk type).
+			 * @return requested value if compatible.
+			 */
+			etk::Color<> getColor() const {
+				return getColorInt();
+			}
+			/**
+			 * @brief check if the node is a fluorine::ColorFloat or fluorine::ColorInt
+			 * @return true if the node is a fluorine::ColorFloat or fluorine::ColorInt
 			 */
 			bool isColor() const;
+			/**
+			 * @brief check if the node is a fluorine::ColorFloat
+			 * @return true if the node is a fluorine::ColorFloat
+			 */
+			bool isColorFloat() const;
+			/**
+			 * @brief check if the node is a fluorine::ColorInt
+			 * @return true if the node is a fluorine::ColorInt
+			 */
+			bool isColorInt() const;
 		public:
 			/**
 			 * @brief Get the vec2 Value.

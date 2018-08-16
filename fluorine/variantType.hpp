@@ -20,7 +20,8 @@ namespace fluorine {
 		RawPointer, //!< Void * pointer
 		String,  //!< String element
 		Boolean, //!< Boolean element
-		Color, //!< Color RGBA float element
+		ColorFloat, //!< Color RGBA float element
+		ColorInt, //!< Color RGBA int element
 		Vec2, //!< 2D vector Position (float)
 		IVec2, //!< 2D vector Position (integer)
 		Vec3, //!< 3D vector Position (float)

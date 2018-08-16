@@ -146,7 +146,25 @@ TEST(constructor, testString_2) {
 	EXPECT_EQ(element.isNull(), false);
 }
 
-TEST(constructor, testColor) {
+TEST(constructor, testColorFloat) {
+	fluorine::Variant element(etk::Color<float>(1.0,0.5,0.7,0.6));
+	EXPECT_EQ(element.isUndefined(), false);
+	EXPECT_EQ(element.isBoolean(), false);
+	EXPECT_EQ(element.isInt(), false);
+	EXPECT_EQ(element.isUInt(), false);
+	EXPECT_EQ(element.isFloat(), false);
+	EXPECT_EQ(element.isRawPointer(), false);
+	EXPECT_EQ(element.isString(), false);
+	EXPECT_EQ(element.isColor(), true);
+	EXPECT_EQ(element.isVec2(), false);
+	EXPECT_EQ(element.isIVec2(), false);
+	EXPECT_EQ(element.isVec3(), false);
+	EXPECT_EQ(element.isIVec3(), false);
+	EXPECT_EQ(element.isNull(), false);
+	EXPECT_EQ(element.isColorFloat(), true);
+	EXPECT_EQ(element.isColorInt(), false);
+}
+TEST(constructor, testColorInt) {
 	fluorine::Variant element(etk::Color<>(55,55,55,65));
 	EXPECT_EQ(element.isUndefined(), false);
 	EXPECT_EQ(element.isBoolean(), false);
@@ -161,6 +179,8 @@ TEST(constructor, testColor) {
 	EXPECT_EQ(element.isVec3(), false);
 	EXPECT_EQ(element.isIVec3(), false);
 	EXPECT_EQ(element.isNull(), false);
+	EXPECT_EQ(element.isColorFloat(), false);
+	EXPECT_EQ(element.isColorInt(), true);
 }
 
 TEST(constructor, testVec2) {
@@ -294,9 +314,13 @@ TEST(constructor, testString_2Value) {
 	EXPECT_EQ(element.getString(), "HGFDSQ");
 }
 
-TEST(constructor, testColorValue) {
+TEST(constructor, testColorValueFloat) {
+	fluorine::Variant element(etk::Color<float>(1.0,0.5,0.7,0.6));
+	EXPECT_EQ(element.getColorFloat(), etk::Color<float>(1.0,0.5,0.7,0.6));
+}
+TEST(constructor, testColorValueInt) {
 	fluorine::Variant element(etk::Color<>(55,55,55,65));
-	EXPECT_EQ(element.getColor(), etk::Color<>(55,55,55,65));
+	EXPECT_EQ(element.getColorInt(), etk::Color<>(55,55,55,65));
 }
 
 TEST(constructor, testVec2Value) {
@@ -379,11 +403,18 @@ TEST(constructor, testString_2ValueOperator) {
 	EXPECT_EQ(element.getString(), "HGFDSQ");
 }
 
-TEST(constructor, testColorValueOperator) {
+TEST(constructor, testColorValueOperatorFloat) {
+	fluorine::Variant element;
+	EXPECT_EQ(element.isUndefined(), true);
+	element = etk::Color<float>(1.0,0.5,0.7,0.6);
+	EXPECT_EQ(element.getColorFloat(), etk::Color<float>(1.0,0.5,0.7,0.6));
+}
+
+TEST(constructor, testColorValueOperatorInt) {
 	fluorine::Variant element;
 	EXPECT_EQ(element.isUndefined(), true);
 	element = etk::Color<>(55,55,55,65);
-	EXPECT_EQ(element.getColor(), etk::Color<>(55,55,55,65));
+	EXPECT_EQ(element.getColorInt(), etk::Color<>(55,55,55,65));
 }
 
 TEST(constructor, testVec2ValueOperator) {

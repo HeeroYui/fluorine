@@ -40,8 +40,11 @@ etk::Stream& fluorine::operator <<(etk::Stream& _os, const fluorine::Variant& _o
 		case fluorine::variantType::String:
 			_os << _obj.getString();
 			break;
-		case fluorine::variantType::Color:
-			_os << _obj.getColor();
+		case fluorine::variantType::ColorFloat:
+			_os << _obj.getColorFloat();
+			break;
+		case fluorine::variantType::ColorInt:
+			_os << _obj.getColorInt();
 			break;
 		case fluorine::variantType::Vec2:
 			_os << _obj.getVec2();
@@ -114,8 +117,10 @@ fluorine::Variant fluorine::Variant::clone() const {
 			return fluorine::Variant{getRawPointer()};
 		case fluorine::variantType::String:
 			return fluorine::Variant{getString()};
-		case fluorine::variantType::Color:
-			return fluorine::Variant{getColor()};
+		case fluorine::variantType::ColorFloat:
+			return fluorine::Variant{getColorFloat()};
+		case fluorine::variantType::ColorInt:
+			return fluorine::Variant{getColorInt()};
 		case fluorine::variantType::Vec2:
 			return fluorine::Variant{getVec2()};
 		case fluorine::variantType::IVec2:
@@ -141,8 +146,11 @@ void fluorine::Variant::clear() {
 		case fluorine::variantType::String:
 			ETK_DELETE(etk::String, m_dataUnion.m_string);
 			break;
-		case fluorine::variantType::Color:
-			ETK_DELETE(etk::Color<>, m_dataUnion.m_color);
+		case fluorine::variantType::ColorFloat:
+			ETK_DELETE(etk::Color<float>, m_dataUnion.m_colorFloat);
+			break;
+		case fluorine::variantType::ColorInt:
+			ETK_DELETE(etk::Color<>, m_dataUnion.m_colorInt);
 			break;
 		case fluorine::variantType::Vec2:
 			ETK_DELETE(vec2, m_dataUnion.m_vec2);
@@ -250,9 +258,13 @@ fluorine::Variant::Variant(const ivec3& _value):
 	m_dataUnion.m_ivec3 = ETK_NEW(ivec3, _value);
 }
 
+fluorine::Variant::Variant(const etk::Color<float>& _value):
+  m_dataType(fluorine::variantType::ColorFloat) {
+	m_dataUnion.m_colorFloat = ETK_NEW(etk::Color<float>, _value);
+}
 fluorine::Variant::Variant(const etk::Color<>& _value):
-  m_dataType(fluorine::variantType::Color) {
-	m_dataUnion.m_color = ETK_NEW(etk::Color<>, _value);
+  m_dataType(fluorine::variantType::ColorInt) {
+	m_dataUnion.m_colorInt = ETK_NEW(etk::Color<>, _value);
 }
 
 fluorine::Variant::~Variant() {
@@ -307,12 +319,28 @@ bool fluorine::Variant::isString() const {
 	return m_dataType == fluorine::variantType::String;
 }
 
-etk::Color<> fluorine::Variant::getColor() const {
-	return *(m_dataUnion.m_color);
+etk::Color<float> fluorine::Variant::getColorFloat() const {
+	if (m_dataType == fluorine::variantType::ColorFloat) {
+		return *(m_dataUnion.m_colorFloat);
+	}
+	return *(m_dataUnion.m_colorInt);
+}
+etk::Color<> fluorine::Variant::getColorInt() const {
+	if (m_dataType == fluorine::variantType::ColorFloat) {
+		return *(m_dataUnion.m_colorFloat);
+	}
+	return *(m_dataUnion.m_colorInt);
 }
 
 bool fluorine::Variant::isColor() const {
-	return m_dataType == fluorine::variantType::Color;
+	return    m_dataType == fluorine::variantType::ColorFloat
+	       || m_dataType == fluorine::variantType::ColorInt;
+}
+bool fluorine::Variant::isColorFloat() const {
+	return m_dataType == fluorine::variantType::ColorFloat;
+}
+bool fluorine::Variant::isColorInt() const {
+	return m_dataType == fluorine::variantType::ColorInt;
 }
 
 vec2 fluorine::Variant::getVec2() const {
