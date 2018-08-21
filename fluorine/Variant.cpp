@@ -328,6 +328,32 @@ bool fluorine::Variant::isFloat() const {
 	return m_dataType == fluorine::variantType::Float;
 }
 
+float_t fluorine::Variant::getNumber() const {
+	return getSafeNumber();
+}
+float_t fluorine::Variant::getSafeNumber() const {
+	if (isFloat() == true) {
+		return getFloat();
+	}
+	if (isUInt() == true) {
+		return getUInt();
+	}
+	if (isInt() == true) {
+		return getInt();
+	}
+	if (isBoolean() == true) {
+		return getBoolean()==true?1:0;
+	}
+	return 0;
+}
+
+bool fluorine::Variant::isNumber() const {
+	return    m_dataType == fluorine::variantType::Float
+	       || m_dataType == fluorine::variantType::UnsignedInteger
+	       || m_dataType == fluorine::variantType::Integer
+	       || m_dataType == fluorine::variantType::Boolean;
+}
+
 void* fluorine::Variant::getRawPointer() const {
 	return m_dataUnion.m_rawPointer;
 }

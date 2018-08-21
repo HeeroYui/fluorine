@@ -200,6 +200,22 @@ namespace fluorine {
 			bool isFloat() const;
 		public:
 			/**
+			 * @brief Get the uint_t Value.
+			 * @return requested value if compatible.
+			 */
+			float_t getNumber() const;
+			/**
+			 * @brief Get the uint_t Value. (Safe mode)
+			 * @return requested value if compatible.
+			 */
+			float_t getSafeNumber() const;
+			/**
+			 * @brief check if the node is a fluorine::Float | fluorine::UnsignedInteger | fluorine::Integer
+			 * @return true if the node is a fluorine::Float | fluorine::UnsignedInteger | fluorine::Integer
+			 */
+			bool isNumber() const;
+		public:
+			/**
 			 * @brief Get the void* Value.
 			 * @return requested value if compatible.
 			 */
