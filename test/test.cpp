@@ -10,7 +10,6 @@
 #include <etk/archive/Archive.hpp>
 #include <test-debug/debug.hpp>
 #include <etest/etest.hpp>
-#include <etk/os/FSNode.hpp>
 
 
 int main(int argc, const char *argv[]) {
